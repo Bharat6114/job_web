@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #custam app 
+    "job_app",
 ]
 
 MIDDLEWARE = [
@@ -63,6 +65,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'job_app.context_processor.categories',
+                'job_app.context_processor.jobtypes',
+
             ],
         },
     },
@@ -123,3 +128,5 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
     
 ]
+MEDIA_URL ="/media/"
+MEDIA_ROOT =  os.path.join(BASE_DIR, "media")

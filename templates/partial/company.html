@@ -18,8 +18,10 @@
                         <div class="thumb">
                             <img src="static/img/svg_icon/5.svg" alt="">
                         </div>
-                        <a href="jobs.html"><h3>Snack Studio</h3></a>
-                        <p> <span>50</span> Available position</p>
+                        {% for jobs in jobs_list  %}
+                        <a href="partial/jobs.html"><h3>{{jobs.company_name}}</h3></a>
+                        <p> <span>{{jobs.vacency_no}}</span> Available position</p>
+                        {% endfor %}
                     </div>
                 </div>
                 <div class="col-lg-4 col-xl-3 col-md-6">
