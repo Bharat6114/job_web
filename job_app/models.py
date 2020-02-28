@@ -26,9 +26,8 @@ class Category(models.Model):
         return self.title
 
 class Jobs(models.Model):
-    #user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=300)
-    description = models.TextField()
+    required_no = models.CharField(max_length=20)
     job_requirements = models.TextField()
     qualifications = models.TextField()
     count = models.IntegerField(default=0)
@@ -39,7 +38,6 @@ class Jobs(models.Model):
     jobtype = models.ManyToManyField(Jobtype, related_name="job_types")
     category = models.ManyToManyField(Category, related_name="job_categoreis")
     last_date = models.DateTimeField()
-    vacency_no = models.IntegerField("3")
     website = models.CharField(max_length=100)
     created_at = models.DateTimeField(default=timezone.now)
     last_date = models.DateTimeField()
