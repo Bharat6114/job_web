@@ -11,16 +11,19 @@
 
 
             <div class="row">
-            {% for category in categories  %}
-                <div class="col-lg-4 col-lg-3 col-lg-4">
+            
+            {% for category in categories|slice:":8"  %}
+                <div class="col-lg-4 col-xl-3 col-md-6">
                     <div class="single_catagory">
                         <li><a href="{% url 'category_jobs' category_id=category.id %}"><h4>{{category.title}}</h4></a></li>
                         <p> <span>
                         300</span> Available position</p>
                     </div>
                 </div>
+                
                 {% endfor %}
                 
                
             </div>
+            
         </div>

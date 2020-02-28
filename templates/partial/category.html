@@ -21,7 +21,7 @@
 
                             <option data-display="Category">Category</option>
                             {% for category in categories %}
-                            <option value="1">{{category.title}}</option>
+                            <option >{{category.title}}</option>
                            
                             {% endfor %}
                           </select>
@@ -38,7 +38,7 @@
                     <div class="popular_search d-flex align-items-center">
                         <span>Popular Search:</span>
                         <ul>
-                        {% for category in categories %}
+                        {% for category in categories|slice:":7" %}
                             <li><a href="{% url 'category_jobs' category_id=category.id %}">{{category.title}}</a></li>
                         {% endfor %}
                         </ul>

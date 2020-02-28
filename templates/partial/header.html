@@ -16,14 +16,8 @@
                                     <nav>
                                         <ul id="navigation">
                                             <li><a href= {% url 'home' %}>home</a></li>
-                                            <li><a href="jobs.html">Browse Job</a></li>
-                                            <li><a href="#">pages <i class="ti-angle-down"></i></a>
-                                                <ul class="submenu">
-                                                    <li><a href="candidate.html">Candidates </a></li>
-                                                    <li><a href="job_details.html">job details </a></li>
-                                                    <li><a href="elements.html">elements</a></li>
-                                                </ul>
-                                            </li>
+                                            <li><a href= {% url 'home' %}>Browse Job</a></li>
+                                            
                                             <li><a href="#">blog <i class="ti-angle-down"></i></a>
                                                 <ul class="submenu">
                                                     <li><a href="blog.html">blog</a></li>
@@ -35,14 +29,25 @@
                                     </nav>
                                 </div>
                             </div>
+                        
+
                             <div class="col-xl-3 col-lg-3 d-none d-lg-block">
                                 <div class="Appointment">
+                                {% if request.user.is_authenticated %}
                                     <div class="phone_num d-none d-xl-block">
-                                        <a href="#">Log in</a>
+                                        <a href="{% url 'logout' %}">Logout</a>
                                     </div>
                                     <div class="d-none d-lg-block">
-                                        <a class="boxed-btn3" href="#">Post a Job</a>
+                                        <a class="boxed-btn3" href="{% url 'create_jobs' %}">Post a Job</a>
                                     </div>
+                                    {% else %}
+                                    <div class="phone_num d-none d-xl-block">
+                                        <a href="{% url 'login' %}">Login</a>
+                                    </div>
+                                    <div class="d-none d-lg-block">
+                                        <a class="boxed-btn3" href="{% url 'user_register' %}">Signup</a>
+                                    </div>
+                                    {% endif %}
                                 </div>
                             </div>
                             <div class="col-12">

@@ -13,15 +13,17 @@
                 </div>
             </div>
             <div class="job_lists">
+             {% for jobs in jobs_list|slice:":6" %}
                 <div class="row">
                     <div class="col-lg-12 col-md-12">
                         <div class="single_jobs white-bg d-flex justify-content-between">
                             <div class="jobs_left d-flex align-items-center">
                                 <div class="thumb">
+                               
                                     <img src="static/img/svg_icon/1.svg" alt="">
                                 </div>
                                 <div class="jobs_conetent">
-                                 {% for jobs in jobs_list %}
+                                 
                                     <a href="{{ jobs.get_absolute_url }}"><h4>{{jobs.title}}</h4></a>
                                     <div class="links_locat d-flex align-items-center">
                                         <div class="location">
@@ -29,7 +31,7 @@
                                         </div>
                                         <div class="location">
                                        
-                                            <p> <i class="fa fa-clock-o"></i>
+                                        <p> <i class="fa fa-clock-o"></i>
                                             
                                         {% for jobtype in jobs.jobtype.all %}
                                            {{ jobtype.title  }} 
@@ -45,13 +47,14 @@
                                     <a href="{{ jobs.get_absolute_url }}" class="boxed-btn3">Apply Now</a>
                                 </div>
                                 <div class="date">
-                                    <p>{{jobs.last_date}}</p>
+                                    <p>Last-date: {{jobs.last_date}}</p>
                                 </div>
                             </div>
                         </div>
-                    {% endfor %}
+                   
                     </div>
                    
                 </div>
+             {% endfor %}
             </div>
-        </div>
+</div>

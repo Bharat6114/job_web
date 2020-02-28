@@ -1,0 +1,44 @@
+
+{% extends 'partial/layout.html' %}
+{% load crispy_forms_tags %}
+
+    {% block header %}
+    {% include "partial/header.html" %}
+    {% endblock header %}
+   
+        {% block jobs %}
+        <p>Login</p>
+        <p></p>
+        <form method="post" enctype="multipart/form-data">
+        {% csrf_token %} {{ form|crispy }}
+         <button type="submit">Update</button>
+       </form>
+        {% endblock jobs %}
+
+    
+        {% block featuredcandidates %}
+        {% include "partial/featuredcandidates.html" %}
+        {% endblock featuredcandidates %}
+
+
+    
+        {% block popularcompany %}
+        {% include "partial/company.html" %}
+        {% endblock popularcompany %}
+
+        {% block jobsearch %}
+        {% include "partial/jobsearch.html" %}
+        {% endblock jobsearch %}
+
+       {% block testimonial %}
+       {% include "partial/testimonial.html" %}
+       {% endblock testimonial %}
+   
+         {% block footer %}
+         {% include "partial/footer.html" %}
+         {% endblock footer %}
+
+    {% block script %}
+    {% include "partial/script.html" %}
+    {% endblock script %}
+
