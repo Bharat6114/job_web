@@ -65,7 +65,7 @@ class JobsDetail(DetailView):
         self.object.count = self.object.count + 1
         self.object.save()
         context=self.object.save()
-        context["popular_jobs"] = Jobs.objects.order_by("-count")[:6]
+        #context["popular_jobs"] = Jobs.objects.order_by("-count")[:6]
         return context
 class JobsCreateView(LoginRequiredMixin, CreateView):
     model = Jobs
