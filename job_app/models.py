@@ -44,6 +44,5 @@ class Jobs(models.Model):
     filled = models.BooleanField(default=False)
     salary = models.IntegerField(default=0, blank=True)
     
-    
-def get_absolute_url(self):
-    return reverse("single_jobs", kwargs={"pk": self.pk, "slug": self.slug})
+    def get_absolute_url(self):
+        return reverse("single_jobs", kwargs={"pk": self.pk, "slug": self.slug})

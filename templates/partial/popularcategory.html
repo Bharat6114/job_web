@@ -17,7 +17,13 @@
                     <div class="single_catagory">
                         <li><a href="{% url 'category_jobs' category_id=category.id %}"><h4>{{category.title}}</h4></a></li>
                         <p> <span>
-                        300</span> Available position</p>
+                        {% for jobs in jobs_list %}
+                            {% if forloop.last %}
+                            {{forloop.counter}}
+                        {% endif %}
+                         {% endfor %}
+                        </span> Available position</p>
+                      
                     </div>
                 </div>
                 
