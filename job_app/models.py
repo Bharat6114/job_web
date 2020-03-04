@@ -46,3 +46,10 @@ class Jobs(models.Model):
     
     def get_absolute_url(self):
         return reverse("single_jobs", kwargs={"pk": self.pk, "slug": self.slug})
+
+class Applicants(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    website = models.CharField(max_length=100)
+    cv = models.FileField(("cyz.pdf"), upload_to='uploaded_files/',default='')
+    coverletter = models.TextField()

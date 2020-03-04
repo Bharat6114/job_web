@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from job_app.models import Category
 from job_app.models import Jobs
 from job_app.models import Jobtype
+from job_app.models import Applicants
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.utils.text import slugify
@@ -19,6 +20,7 @@ from django.views.generic import (
 )
 
 from job_app.forms import JobsCreateForm
+from job_app.forms import JobApplyForm
 # Create your views here.
 class JobtypeJobsView(View):
     def get(self, request,jobtype_id,*args, **kwargs):
@@ -60,13 +62,15 @@ class JobsDetail(DetailView):
     model = Jobs
     template_name = "job/single_jobs.html"
     context_object_name = "detail_jobs"
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         self.object.count = self.object.count + 1
         self.object.save()
-        context=self.object.save()
-        #context["popular_jobs"] = Jobs.objects.order_by("-count")[:6]
+        context["popular_jobs"] = Jobs.objects.order_by("-count")[:4]
         return context
+
+
 class JobsCreateView(LoginRequiredMixin, CreateView):
     model = Jobs
     template_name = "job/create.html"
@@ -91,7 +95,7 @@ class JobsCreateView(LoginRequiredMixin, CreateView):
 class JobsUpdateView(LoginRequiredMixin, UpdateView):
     model = Jobs
     template_name = "job/update.html"
-    fields = "title", "description","location", "category","vacency_no","jobtype","company_name","company_description","website","created_at","last_date","filled","salary"
+    fields = "title", "description","job_requirements","location", "category","required_no","jobtype","company_name","company_description","website","created_at","last_date","filled","salary"
     login_url = reverse_lazy("login")
     success_url = reverse_lazy("home")
 
@@ -103,3 +107,18 @@ class JobsDeleteView(LoginRequiredMixin, DeleteView):
 
     def get(self, request, *args, **kwargs):
         return self.post(self, request, *args, **kwargs)
+class JobsApplyView(LoginRequiredMixin,CreateView):
+    model = Applicants
+    template_name = "job/single_jobs.html.html"
+    login_url = reverse_lazy("login")
+    success_url = reverse_lazy("home")
+    form_class = JobApplyForm
+
+    def form_valid(self, form):
+        Applicants = form.save(commit=False)
+        Applicants.save()
+
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        return super().form_invalid(form)

@@ -1,4 +1,5 @@
 {% extends 'partial/layout.html' %}
+
     {% block header %}
     {% include "partial/header.html" %}
     {% endblock header %}
@@ -40,10 +41,14 @@
                                     <a href="#"><h4>{{detail_jobs.title}}</h4></a>
                                     <div class="links_locat d-flex align-items-center">
                                         <div class="location">
-                                            <p> <i class="fa fa-map-marker"></i> California, USA</p>
+                                            <p> <i class="fa fa-map-marker"></i> {{detail_jobs.location}}</p>
                                         </div>
                                         <div class="location">
-                                            <p> <i class="fa fa-clock-o"></i> Part-time</p>
+                                            <p> <i class="fa fa-clock-o"></i>
+                                             {% for jobtype in detail_jobs.jobtype.all  %}
+                                             {{jobtype.title}}
+                                             {% endfor %}
+                                          </p>
                                         </div>
                                     </div>
                                 </div>
@@ -58,36 +63,27 @@
                     <div class="descript_wrap white-bg">
                         <div class="single_wrap">
                             <h4>Job description</h4>
-                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing.</p>
-                            <p>Variations of passages of lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing.</p>
-                        </div>
-                        <div class="single_wrap">
-                            <h4>Responsibility</h4>
-                            <ul>
-                                <li>The applicants should have experience in the following areas.
-                                </li>
-                                <li>Have sound knowledge of commercial activities.</li>
-                                <li>Leadership, analytical, and problem-solving abilities.</li>
-                                <li>Should have vast knowledge in IAS/ IFRS, Company Act, Income Tax, VAT.</li>
-                            </ul>
+                            <p>{{detail_jobs.job_requirements}}</p>
+                            
                         </div>
                         <div class="single_wrap">
                             <h4>Qualifications</h4>
                             <ul>
-                                <li>The applicants should have experience in the following areas.
+                            <li> {{detail_jobs.qualifications }}
                                 </li>
-                                <li>Have sound knowledge of commercial activities.</li>
-                                <li>Leadership, analytical, and problem-solving abilities.</li>
-                                <li>Should have vast knowledge in IAS/ IFRS, Company Act, Income Tax, VAT.</li>
+                                
                             </ul>
                         </div>
+                        
                         <div class="single_wrap">
                             <h4>Benefits</h4>
                             <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing.</p>
                         </div>
                     </div>
+
                     <div class="apply_job_form white-bg">
                         <h4>Apply for the job</h4>
+
                         <form action="#">
                             <div class="row">
                                 <div class="col-md-6">
@@ -138,11 +134,15 @@
                         </div>
                         <div class="job_content">
                             <ul>
-                                <li>Published on: <span>12 Nov, 2019</span></li>
-                                <li>Vacancy: <span>2 Position</span></li>
-                                <li>Salary: <span>50k - 120k/y</span></li>
-                                <li>Location: <span>California, USA</span></li>
-                                <li>Job Nature: <span> Full-time</span></li>
+                                <li>Published on: <span>{{detail_jobs.created_at}}</span></li>
+                                <li>Vacancy: <span>{{detail_jobs.required_no}}</span></li>
+                                <li>Salary: <span>{{detail_jobs.salary}}/Month</span></li>
+                                <li>Location: <span>{{detail_jobs.location}}</span></li>
+                                <li>Job Nature: <span>
+                              {% for jobtype in detail_jobs.jobtype.all  %}
+                                {{jobtype.title}}
+                                {% endfor %}
+                                </span></li>
                             </ul>
                         </div>
                     </div>
@@ -180,7 +180,7 @@
                               }
                               
                             </script>
-                            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpfS1oRGreGSBU5HHjMmQ3o5NLw7VdJ6I&callback=initMap"></script>
+                            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBwUp68UZkrC69l2vBaEKZf1w5MbynIyGI&callback=initMap"></script>
                             
                           </div>
                     </div>
