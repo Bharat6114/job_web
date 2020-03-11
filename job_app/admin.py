@@ -1,5 +1,6 @@
 from django.contrib import admin
 from job_app.models import Jobs,Category,Jobtype
+from accounts.models import User,Profile
 
 # Register your models here.
 
@@ -15,3 +16,6 @@ class JobsAdmin(admin.ModelAdmin):
     # 
 admin.site.register(Category)
 admin.site.register(Jobtype)
+admin.site.register(User)
+admin.site.register(Profile)
+
