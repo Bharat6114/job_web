@@ -79,25 +79,78 @@
                             <h4>Benefits</h4>
                             <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing.</p>
                         </div>
+                
                     </div>
+                
+                
+                 <div class="pt-5">
+                    <p>
+                    Categories:  
+                    {% for category in detail_jobs.category.all  %}
+                    
+                    <a href="{% url 'category_jobs' category_id=category.id %}">{{ category.title }}</a>
+                    {% endfor %}
+                    </p>
 
-                    <div class="apply_job_form white-bg">
+                    <p>
+                   {% if request.user.is_authenticated and detail_jobs.author == request.user %}
+                    <a href="{% url 'update_jobs' pk=detail_jobs.id %}"><button type="button" class="btn btn-info">Update</button></a>
+
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                      Delete
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Do you really want to delete?</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            {{ detail_news.title }}
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <a href="{% url 'delete_jobs' pk=detail_jobs.id %}"><button type="button" class="btn btn-primary">Confirm</button></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {% endif %}
+                    
+                    </p>
+                  </div>
+      
+                  <p id="not-login"> <p>
+                {% if request.user.is_authenticated  %}
+
+
+                    <div class="apply_job_form white-bg" id="apply-form">
                         <h4>Apply for the job</h4>
 
+                        <p id="not-login"> <p>
                         <form action="#">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="input_field">
+                                <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}" id="token">
+
+                                    <div class="input_field" id="name">
                                         <input type="text" placeholder="Your name">
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6" id="email">
                                     <div class="input_field">
                                         <input type="text" placeholder="Email">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <div class="input_field">
+                                    <div class="input_field"  id="Website">
                                         <input type="text" placeholder="Website/Portfolio link">
                                     </div>
                                 </div>
@@ -126,6 +179,7 @@
                             </div>
                         </form>
                     </div>
+                    {% endif %}
                 </div>
                 <div class="col-lg-4">
                     <div class="job_sumary">

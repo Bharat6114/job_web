@@ -3,7 +3,6 @@ from django.shortcuts import render, get_object_or_404
 from job_app.models import Category
 from job_app.models import Jobs
 from job_app.models import Jobtype
-from job_app.models import Applicants
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.utils.text import slugify
@@ -107,18 +106,3 @@ class JobsDeleteView(LoginRequiredMixin, DeleteView):
 
     def get(self, request, *args, **kwargs):
         return self.post(self, request, *args, **kwargs)
-class JobsApplyView(LoginRequiredMixin,CreateView):
-    model = Applicants
-    template_name = "job/single_jobs.html.html"
-    login_url = reverse_lazy("login")
-    success_url = reverse_lazy("home")
-    form_class = JobApplyForm
-
-    def form_valid(self, form):
-        Applicants = form.save(commit=False)
-        Applicants.save()
-
-        return super().form_valid(form)
-
-    def form_invalid(self, form):
-        return super().form_invalid(form)

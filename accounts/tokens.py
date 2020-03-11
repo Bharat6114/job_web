@@ -4,9 +4,6 @@ from django.utils import six
 
 class UserRegistrationTokenGenerator(PasswordResetTokenGenerator):
     pass
-
     def _make_hash_value(self, user, timestamp):
         return six.text_type(user.id) + six.text_type(timestamp) + six.text_type(user.is_status)
-
-
 activation_token = UserRegistrationTokenGenerator()

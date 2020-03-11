@@ -1,12 +1,10 @@
 
 from django.shortcuts import render
-from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-# Create your views here.
 from django.shortcuts import render, HttpResponse
 from django.views import View
 from accounts.forms import UserRegistrationForm
-
+from django.contrib.auth.models import User
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.contrib.sites.shortcuts import get_current_site
@@ -69,10 +67,3 @@ def activate(request, uidb64, token):
         user.is_active = True
         return render(request, "account/activation_success.html")
     return render(request, "account/activation_fail.html")
-
-    # Create your views here.
-def login(request):
-    return render(request, 'account/login.html')
-@login_required
-def home(request):
-    return render(request, 'index.html')
