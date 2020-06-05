@@ -18,8 +18,17 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import include, path
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
+
 
 from job_app import views
+from django.conf.urls import url
+from rest_framework_swagger.views import get_swagger_view
+
+schema_view = get_swagger_view(title="jobs Portal API")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,5 +36,15 @@ urlpatterns = [
     path("", views.JobsTemplateView.as_view(), name="home"),
     path('accounts/',include('accounts.urls')),
     path('jobs/', include('job_app.urls')),
+    #jwt
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    # urls for apis
+    path("docs/", schema_view),
+    path("api-auth/", include("rest_framework.urls")),
+    path("apis/accounts/", include("accounts.apis.api_urls")),
+    path("apis/job_app/", include("job_app.apis.api_urls")),
+
+
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
